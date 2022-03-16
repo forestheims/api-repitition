@@ -17,4 +17,11 @@ describe('api-repitition routes', () => {
     const res = await request(app).post('/api/v1/books').send(expected);
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('gets all rows from the books table', async () => {
+    const expected = { title: 'Meow', author_name: 'A Cat', pages: 3 };
+    await request(app).post('/api/v1/books').send(expected);
+    const res = await request(app).get('/api/v1/books');
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
