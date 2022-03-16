@@ -13,8 +13,8 @@ describe('api-repitition routes', () => {
   });
 
   it('adds a row to the books table', async () => {
-    const expected = { title: '', author_name: '', pages: '' };
-    const res = request(app).post('/api/v1/books').send(expected);
-    expect(res.body).toEqual(expected);
+    const expected = { title: 'Meow', author_name: 'A Cat', pages: 3 };
+    const res = await request(app).post('/api/v1/books').send(expected);
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 });
