@@ -16,7 +16,7 @@ describe('api-repitition routes', () => {
   it('adds a row to the rocks table', async () => {
     const expected = {
       name: 'Quartz',
-      mohs_hardness: 7,
+      mohsHardness: 7,
       composition: 'silica',
     };
     const res = await request(app).post('/api/v1/rocks').send(expected);
