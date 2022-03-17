@@ -42,6 +42,6 @@ describe('api-repitition routes', () => {
     };
     await Rock.insert(expected);
     const res = await request(app).get('/api/v1/rocks/1');
-    expect(res.body).toEqual([{ id: '1', ...expected }]);
+    expect(res.body).toEqual({ id: '1', ...expected });
   });
 });
