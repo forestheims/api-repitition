@@ -31,4 +31,13 @@ describe('api-repitition routes', () => {
     const res = await request(app).get('/api/v1/books/1');
     expect(res.body).toEqual(expected);
   });
+
+  it('updates a book by id', async () => {
+    const expected = { id: '1', title: 'Meow', author_name: 'A Cat', pages: 3 };
+    await request(app).post('/api/v1/books').send(expected);
+    const res = await (
+      await request(app).patch('/api/v1/books/1')
+    ).send({ author_name: 'A Happy Cat' });
+    expect(res.body).toEqual({ ...expected, author_name: 'A Happy Cat' });
+  });
 });
