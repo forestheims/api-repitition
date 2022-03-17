@@ -44,4 +44,21 @@ describe('api-repitition routes', () => {
     const res = await request(app).get('/api/v1/rocks/1');
     expect(res.body).toEqual({ id: '1', ...expected });
   });
+
+  it('updates a row by id on the rocks table', async () => {
+    const expected = {
+      name: 'Quartz',
+      mohsHardness: 7,
+      composition: 'silica',
+    };
+    await request(app).post('/api/v1/rocks').send(expected);
+    const res = await request(app)
+      .patch('/api/v1/rocks/1')
+      .send({ composition: 'silicon dioxide' });
+    expect(res.body).toEqual({
+      id: '1',
+      ...expected,
+      composition: 'silicon dioxide',
+    });
+  });
 });
