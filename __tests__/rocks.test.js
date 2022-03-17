@@ -22,4 +22,15 @@ describe('api-repitition routes', () => {
     const res = await request(app).post('/api/v1/rocks').send(expected);
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('gets all rows from the rocks table', async () => {
+    const expected = {
+      name: 'Quartz',
+      mohsHardness: 7,
+      composition: 'silica',
+    };
+    await request(app).post('/api/v1/rocks').send(expected);
+    const res = await request(app).get('/api/v1/rocks');
+    expect(res.body).toEqual([{ id: expect.any(String), ...expected }]);
+  });
 });
