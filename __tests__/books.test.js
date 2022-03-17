@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Book = require('../lib/models/Book');
 
 describe('api-repitition routes', () => {
   beforeEach(() => {
@@ -42,6 +43,18 @@ describe('api-repitition routes', () => {
       id: '1',
       ...expected,
       author_name: 'A Happy Cat',
+    });
+
+    it('deletes a book by id', async () => {
+      const aBook = {
+        title: 'Meow',
+        author_name: 'A Cat',
+        pages: 3,
+      };
+      await request(app).post('/api/v1/books').send(aBook);
+      const expected = await Book.getById(1);
+      const res = await request(app).delete(`/api/v1/books/${expected.id}`);
+      expect(res.body).toEqual(expected);
     });
   });
 });
