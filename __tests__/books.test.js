@@ -44,17 +44,17 @@ describe('api-repitition routes', () => {
       ...expected,
       author_name: 'A Happy Cat',
     });
+  });
 
-    it('deletes a book by id', async () => {
-      const aBook = {
-        title: 'Meow',
-        author_name: 'A Cat',
-        pages: 3,
-      };
-      await request(app).post('/api/v1/books').send(aBook);
-      const expected = await Book.getById(1);
-      const res = await request(app).delete(`/api/v1/books/${expected.id}`);
-      expect(res.body).toEqual(expected);
-    });
+  it('deletes a book by id', async () => {
+    const aBook = {
+      title: 'Meow',
+      author_name: 'A Cat',
+      pages: 3,
+    };
+    await request(app).post('/api/v1/books').send(aBook);
+    const expected = await Book.getById(1);
+    const res = await request(app).delete(`/api/v1/books/${expected.id}`);
+    expect(res.body).toEqual(expected);
   });
 });
