@@ -29,8 +29,19 @@ describe('api-repitition routes', () => {
       mohsHardness: 7,
       composition: 'silica',
     };
-    await request(app).post('/api/v1/rocks').send(expected);
+    await Rock.insert(expected);
     const res = await request(app).get('/api/v1/rocks');
     expect(res.body).toEqual([{ id: expect.any(String), ...expected }]);
+  });
+
+  it('gets a row by id from the rocks table', async () => {
+    const expected = {
+      name: 'Quartz',
+      mohsHardness: 7,
+      composition: 'silica',
+    };
+    await Rock.insert(expected);
+    const res = await request(app).get('/api/v1/rocks/1');
+    expect(res.body).toEqual([{ id: '1', ...expected }]);
   });
 });
