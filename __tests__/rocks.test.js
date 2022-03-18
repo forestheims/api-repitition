@@ -63,13 +63,14 @@ describe('api-repitition routes', () => {
   });
 
   it('deletes a row by id from the rocks table', async () => {
-    const expected = {
+    const aRock = {
       name: 'Quartz',
       mohsHardness: 7,
       composition: 'silica',
     };
-    await request(app).post('/api/v1/rocks').send(expected);
-    const res = await request(app).delete('/api/v1/rocks/1');
-    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+    await request(app).post('/api/v1/rocks').send(aRock);
+    const expected = await Rock.getById(1);
+    const res = await request(app).delete(`/api/v1/rocks/${expected.id}`);
+    expect(res.body).toEqual(expected);
   });
 });
