@@ -66,4 +66,11 @@ describe('api-repitition routes', () => {
       name: 'Not a rock',
     });
   });
+
+  it('deletes a row by id from the resins table', async () => {
+    await request(app).post('/api/v1/resins').send(expected);
+    const expected = await Resin.getById(1);
+    const res = await request(app).delete(`/api/v1/resins/${expected.id}`);
+    expect(res.body).toEqual(expected);
+  });
 });
