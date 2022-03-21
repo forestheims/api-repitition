@@ -36,7 +36,7 @@ describe('api-repitition routes', () => {
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 
-  it('gets a row by id from the locations table', async () => {
+  it('updates a row by id from the locations table', async () => {
     await request(app).post('/api/v1/locations').send(expected);
     const res = await request(app)
       .patch('/api/v1/locations/1')
@@ -47,5 +47,13 @@ describe('api-repitition routes', () => {
       x: 44,
       y: 33,
     });
+  });
+
+  it('deletes a row by id from the locations table', async () => {
+    const aLocation = await request(app)
+      .post('/api/v1/locations')
+      .send(expected);
+    const res = await request(app).delete(`/api/v1/locations/${aLocation.id}`);
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 });
