@@ -49,9 +49,9 @@ describe('api-repitition routes', () => {
     ]);
   });
 
-  it('gets a row by id from the rocks table', async () => {
+  it('returns a row by id from the resins table', async () => {
     await request(app).post('/api/v1/resins').send(expected);
-    const res = await request(app).get('/api/v1/rocks/1');
+    const res = await request(app).get('/api/v1/resins/1');
     expect(res.body).toEqual({ id: '1', ...expected });
   });
 });
