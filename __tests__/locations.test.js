@@ -50,10 +50,9 @@ describe('api-repitition routes', () => {
   });
 
   it('deletes a row by id from the locations table', async () => {
-    const aLocation = await request(app)
-      .post('/api/v1/locations')
-      .send(expected);
-    const res = await request(app).delete(`/api/v1/locations/${aLocation.id}`);
+    await request(app).post('/api/v1/locations').send(expected);
+    const getById = await Location.getById(1);
+    const res = await request(app).delete(`/api/v1/locations/${getById.id}`);
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 });
