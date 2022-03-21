@@ -23,6 +23,7 @@ describe('api-repitition routes', () => {
       'phellandrene',
     ],
   };
+
   const expectedBackwords = {
     name: 'Esnecniknarf',
     sourceTaxonomy: 'Arcas aillewsob',
@@ -69,8 +70,8 @@ describe('api-repitition routes', () => {
 
   it('deletes a row by id from the resins table', async () => {
     await request(app).post('/api/v1/resins').send(expected);
-    const expected = await Resin.getById(1);
-    const res = await request(app).delete(`/api/v1/resins/${expected.id}`);
-    expect(res.body).toEqual(expected);
+    const getById = await Resin.getById(1);
+    const res = await request(app).delete(`/api/v1/resins/${getById.id}`);
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 });
