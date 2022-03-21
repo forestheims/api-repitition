@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS resins;
 DROP TABLE IF EXISTS rocks;
 
 CREATE TABLE books (
@@ -6,6 +7,12 @@ CREATE TABLE books (
   title TEXT NOT NULL,
   author_name TEXT NOT NULL,
   pages INT NOT NULL
+);
+
+CREATE TABLE resins (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  source_taxonomy TEXT NOT NULL,
+  predominant_chemicals TEXT [] NOT NULL
 );
 
 CREATE TABLE rocks (
