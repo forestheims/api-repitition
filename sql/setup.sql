@@ -11,6 +11,7 @@ CREATE TABLE books (
 
 CREATE TABLE resins (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
   source_taxonomy TEXT NOT NULL,
   predominant_chemicals TEXT [] NOT NULL
 );
