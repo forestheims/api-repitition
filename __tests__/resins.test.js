@@ -54,4 +54,16 @@ describe('api-repitition routes', () => {
     const res = await request(app).get('/api/v1/resins/1');
     expect(res.body).toEqual({ id: '1', ...expected });
   });
+
+  it('updates a resin by id', async () => {
+    await request(app).post('/api/v1/resins').send(expected);
+    const res = await request(app)
+      .patch('/api/v1/resins/1')
+      .send({ name: 'Not a rock' });
+    expect(res.body).toEqual({
+      id: '1',
+      ...expected,
+      name: 'Not a rock',
+    });
+  });
 });
