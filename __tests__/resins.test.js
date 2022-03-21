@@ -48,4 +48,10 @@ describe('api-repitition routes', () => {
       { id: expect.any(String), ...expectedBackwords },
     ]);
   });
+
+  it('gets a row by id from the rocks table', async () => {
+    await request(app).post('/api/v1/resins').send(expected);
+    const res = await request(app).get('/api/v1/rocks/1');
+    expect(res.body).toEqual({ id: '1', ...expected });
+  });
 });
