@@ -23,4 +23,10 @@ describe('api-repitition routes', () => {
     const res = await request(app).post('/api/v1/locations').send(expected);
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('gets all rows from the locations table', async () => {
+    await request(app).post('/api/v1/locations').send(expected);
+    const res = await request(app).get('/api/v1/locations');
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
