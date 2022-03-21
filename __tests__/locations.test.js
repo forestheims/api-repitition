@@ -35,4 +35,17 @@ describe('api-repitition routes', () => {
     const res = await request(app).get('/api/v1/locations/1');
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('gets a row by id from the locations table', async () => {
+    await request(app).post('/api/v1/locations').send(expected);
+    const res = await request(app)
+      .patch('/api/v1/locations/1')
+      .send({ x: 44, y: 33 });
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      ...expected,
+      x: 44,
+      y: 33,
+    });
+  });
 });
