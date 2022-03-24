@@ -1,2 +1,42 @@
--- Use this file to define your SQL tables
--- The SQL in this file will be executed when you run `npm run setup-db`
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS resins;
+DROP TABLE IF EXISTS rocks;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS locations;
+
+CREATE TABLE books (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title TEXT NOT NULL,
+  author_name TEXT NOT NULL,
+  pages INT NOT NULL
+);
+
+CREATE TABLE resins (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  source_taxonomy TEXT NOT NULL,
+  predominant_chemicals TEXT [] NOT NULL
+);
+
+CREATE TABLE rocks (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  mohs_hardness INT NOT NULL,
+  composition TEXT NOT NULL
+);
+
+CREATE TABLE users (
+  user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  username TEXT NOT NULL,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE locations (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  x INT NOT NULL,
+  y INT NOT NULL,
+  z INT NOT NULL
+);
